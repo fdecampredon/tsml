@@ -1,0 +1,1362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>TSML - Language Reference</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>TSML - Language Reference</h1>
+<span id="author">François de Campredon</span><br />
+<span id="email"><code>&lt;<a href="mailto:francois.de.campredon@gmail.com">francois.de.campredon@gmail.com</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>While [TypeScript](<a href="http://www.typescriptlang.org">http://www.typescriptlang.org</a>) give to developer a type safe superset of javascript suited for large scale web application development, it does not resolve the problem HTML was not designed for dynamic applications but static documents.</p></div>
+<div class="paragraph"><p>HTML provide a set of predefined tags allowing developper to create complex and structured documents. Each one of this tags are final, and can only be assembled, but not extended, preventing developpers to encapsulate application logic in forms of document. With the lack of extensibility, and the poor possibility offered by the html syntax, developer often ends up by being forced to create a large part of their application in script.
+Framework like [Sencha Ext JS](<a href="http://www.sencha.com/products/extjs">http://www.sencha.com/products/extjs</a>) or [SmartClient](<a href="http://smartclient.com/">http://smartclient.com/</a>), completly abstract the Dom, and provide a <em>JSON-Like</em> reprensation of a component hierarchy.
+However a language Like JavaScript is not really suited to user interface creation. By the nature of JavaScript verbose syntax it produce hardly readable code, harden the interaction between designer and developer, and decrease the overall productivity of the development team.</p></div>
+<div class="paragraph"><p>Language like [MXML](<a href="http://en.wikipedia.org/wiki/MXML">http://en.wikipedia.org/wiki/MXML</a>) or [XAML](<a href="http://en.wikipedia.org/wiki/XAML">http://en.wikipedia.org/wiki/XAML</a>) in other technologies offer a more "declarative", more consise, and by fact a more productive way of defining thoses, while giving access to a fully type-safe environement.</p></div>
+<div class="paragraph"><p>TSML (TypeScript Markup Language) is and XML-based language designed to integrate with the TypeScript compiler by producing TypeScript abstract syntax tree.
+By doing this every TSML document will produce class module or function that will be consumable by other TypeScript unit, and will benefit of the type checking of the TypeScript compiler.</p></div>
+<div class="sect2">
+<h3 id="_basic_concept">1.1. Basic concept</h3>
+<div class="paragraph"><p>TSML allow you to define and consume with typescript</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tsml_document">2. TSML Document</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Each TSML document start with the <code>&lt;tsml&gt;</code> tag, and empty document look like this :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+&lt;tsml&gt;</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_defining_variables">3. Defining variables</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To define a variable simply create a tag inside your tsml document, the variable name will be valorized to the id of the this tag :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+        &lt;string id='myVar'&gt;Hello World&lt;/string&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to the following typescript code :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var myVar = 'Hello World';</code></pre>
+</div></div>
+<div class="paragraph"><p>if no id attribute is provided, a random unique id will be assigned to the variable (todo should we not make the id attribute mandatory ? )</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_type">4. Basic type</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>TSML bind a certain number of predefined tag as predefined type here is a list of those tags :</p></div>
+<div class="sect2">
+<h3 id="_string">4.1. string :</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;string&gt;string content&lt;/string&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>'string content';</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_number">4.2. number :</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;number&gt;2.5&lt;/string&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>2.5;</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_boolean">4.3. boolean :</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;boolean&gt;true&lt;/boolean&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>true;</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_array">4.4. array :</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;array&gt;
+        &lt;string&gt;hello&lt;/string&gt;
+        &lt;string&gt;world&lt;/string&gt;
+&lt;/array&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>['hello', 'world'];</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_object">4.5. object :</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;object prop1='world' prop2='hello'&gt;
+        &lt;boolean id='prop3'&gt;false&lt;/boolean&gt;
+&lt;/object&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>{
+        prop1 : 'world',
+        prop2 : 'hello',
+        prop3 : false
+};</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_class">4.6. class</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;class id="Greeter" /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>class Greeter {</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>}</code></pre>
+</div></div>
+<div class="paragraph"><p>class definition will be further developed below</p></div>
+</div>
+<div class="sect2">
+<h3 id="_module">4.7. module</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;module id="a.b" /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>module a.b {</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>}</code></pre>
+</div></div>
+<div class="paragraph"><p>module definition will be further developed below</p></div>
+</div>
+<div class="sect2">
+<h3 id="_function">4.8. function</h3>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;function id="sayHello" /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>function sayHello() {</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>}</code></pre>
+</div></div>
+<div class="paragraph"><p>function definition will be further developed below</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_complex_type">5. Complex type</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Non TSML basic tag are considered like instance of the correspondly named class, for example if we have a class "Foo" in the context of our document :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;Foo id="foo" /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var foo = new Foo();</code></pre>
+</div></div>
+<div class="paragraph"><p>(todo should we introduce a special attribute constructorArg ?)</p></div>
+<div class="paragraph"><p>If Foo is a function, the tag will be considered as the result of calling this function :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;Foo id="foo" /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var foo = Foo();</code></pre>
+</div></div>
+<div class="paragraph"><p>(todo should we introduce a special attribute parameters ?)</p></div>
+<div class="paragraph"><p>children</p></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_import_an_namespace">6. Import an namespace</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In tsml namespace has 3 purpose (todo don&#8217;t know how to formulate this)</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml xmlns:view='import:view/*'
+          xmlns:ui='import:ui'
+          xmlns:foo='foo.*'&gt;</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;ui:Button id='button' /&gt;
+&lt;ui:Checkbox id='checkbox' /&gt;</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;view:View1 id='view1' /&gt;
+&lt;view:View2 id='view2' /&gt;</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;foo:Bar id='bar' /&gt;</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>import ui = require('ui');
+import View1 = require('view/View1');
+import View2 = require('view/View2');</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var button = new ui.Button();
+var checkbox = new ui.Checkbox();
+var view1 = new View1();
+var view2 = new View2();
+var bar = new foo.Bar();</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exporting">7. Exporting</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>to export a variable, class etc use the special attribute export :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;string id='myVar' export='true' &gt;Hello world!&lt;/string&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>export var myVar = 'Hello World';</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;string id='myVar' export='this' &gt;Hello world!&lt;/string&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var myVar = 'Hello World';
+export = myVar;</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setting_property">8. Setting property</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_attribute_property">8.1. Attribute property</h3>
+<div class="paragraph"><p>To set a property on an object you can use an attribute of the xml tag representing this object :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;Bar id='bar' /&gt;
+&lt;Foo id='foo' message='Hello World!' count='5' bar='bar' /&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var bar = new Bar();
+var foo = new Foo();
+foo.message = 'Hello World !';
+foo.count = 5;
+foo.bar = bar;</code></pre>
+</div></div>
+<div class="paragraph"><p>note that the tsml compiler infer the property value using the type of the property, string typed property and any typed property will receive the value attribute as string literal, boolean property will accept <code>true</code> or <code>false</code> as value, complex type will accept a reference to a variable etc …</p></div>
+</div>
+<div class="sect2">
+<h3 id="_child_tag_property">8.2. child tag property</h3>
+<div class="paragraph"><p>You can also using a child to set a property value, for example :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;Foo id='foo'&gt;
+        &lt;bar&gt;
+                &lt;Bar /&gt;
+        &lt;/bar&gt;
+&lt;/Foo&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var foo = new Foo();
+foo.bar = new Bar();</code></pre>
+</div></div>
+<div class="paragraph"><p>(note property child tag must have the same namespace than their parent tag)</p></div>
+<div class="paragraph"><p>interpolation</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>To set a property to a reference of an existing variable, you can use the curly brace characters ({ }) :
+
+
+        <string id='myMessage'>Hello World!</string>
+        <Foo id='foo' message='{myMessage}' />
+
+is equivalent to :
+
+        var myMessage = 'Hello World!';
+        var foo = new Foo();
+        foo.message = myMessage;
+
+in case of string property interpolation can be used as a part of the property value :
+
+        <string id='myMessage'>Hello</string>
+        <Foo id='foo' message='{myMessage} World!' />
+
+is equivalent to :
+
+        var myMessage = 'Hello';
+        var foo = new Foo();
+        foo.message = myMessage + ' World!';
+
+TODO speak of binding and dual binding here
+
+The script tag
+--------------
+
+the special +<script>+ tag allow to include typescript inside of a tsml document, dependings of the contex of the tag the authorized syntax inside the script tag, and the context execution of the script varies.
+
+ Under the root tag</code></pre>
+</div></div>
+<div class="paragraph"><p>Placed as a children of the root <code>&lt;tsml&gt;</code> tag, the script tag  :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+        &lt;script&gt;
+                var test = 'Hello World';
+        &lt;/script&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>var test ='Hello World';</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Inside a class declaration</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Inside a class declaration, the script tag allows you to define property, methods and constructor of this class, the parser will consider that you are inside the class body :
+
+        <tsml>
+                <class id="Greeter">
+                        <script>
+                                sayHello() {
+                                        console.log('Hello World');
+                                }
+                        </script>
+                </class>
+        </tsml>
+
+is equivalent to :
+
+        class Greeter {
+                sayHello() {
+                        console.log('Hello World');
+                }
+        }
+
+ Inside a module declaration</code></pre>
+</div></div>
+<div class="paragraph"><p>Inside a module declaration, the script tag allow you to define class function etc.. inside your module :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+        &lt;module id="greet"&gt;
+                &lt;script&gt;
+                        class Greeter {
+                                sayHello() {
+                                        console.log('Hello World');
+                                }
+                        }
+                &lt;/script&gt;
+        &lt;/module&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>module greet {
+        class Greeter {
+                sayHello() {
+                        console.log('Hello World');
+                }
+        }
+}</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_class_declaration">9. Class declaration</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In a TSML document you declare a class by using the <code>&lt;class&gt;</code> tag. this tag offers special attributes to define the base class, interface implemented etc etc.</p></div>
+<div class="paragraph"><p>A simple class</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>        <tsml>
+                <class id="Greeter" />
+        </tsml>
+
+is equivalent to :
+
+        class Greeter {
+
+        }
+
+Specifying the base class</code></pre>
+</div></div>
+<div class="paragraph"><p>To Specify the base class of a defined class, use the <code>extends</code> attribute</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+        &lt;class id="BaseGreeter" /&gt;
+        &lt;class id="Greeter"  extends="BaseGreeter"/&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>class BaseGreeter {</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>}</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>class Greeter extends BaseGreeter {</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>}</code></pre>
+</div></div>
+<div class="paragraph"><p>Implementing interfaces</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>To Specify a list of implemented interfaces, use the +implements+ attribute
+
+        <tsml>
+                <script>
+                        interface IGreeter {
+
+                        }
+                        interface IHelloWorld {
+
+                        }
+                </script>
+                <class id="Greeter" implements="IGreeter IHelloWorld"/>
+        </tsml>
+
+is equivalent to :
+
+        interface IGreeter {
+
+        }
+
+        interface IHelloWorld {
+
+        }
+
+        class Greeter implements IGreeter,IHelloWorld {
+
+        }
+
+Generic</code></pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+<div class="paragraph"><p>Default value for class property</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>To define default value fo your class you can use attribute :
+
+        <tsml>
+                <class id="Greeter" extends="BaseGreeter" message="Hello World!"/>
+        </tsml>
+
+is equivalent to :
+
+
+        class Greeter extends BaseGreeter {
+                constructor() {
+                        super();
+                        this.message = 'Hello World!';
+                }
+        }
+
+note : in this example we assume that the BaseGreeter class define a property named +message+ of type +string+.
+
+you can also use a child tag
+
+        <tsml>
+                <class id="Foo" extends="BaseFoo">
+                        <bar>
+                                <Bar />
+                        </bar>
+                </class>
+        </tsml>
+
+is equivalent to :
+
+        class Foo extends BaseFoo {
+                constructor() {
+                        super();
+                        this.bar = new Bar();
+                }
+        }
+
+note : in this example we assume that the BaseFoo class define a property named +bar+ of type +Bar+.
+
+Defining property of a class</code></pre>
+</div></div>
+<div class="paragraph"><p>To define properties of a class TSML provide a special tag <code>&lt;declaration&gt;</code> every object of this tag will be considered a property of the defined class :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml&gt;
+        &lt;class id="Foo"&gt;
+                &lt;declaration&gt;
+                        &lt;object id="myObject" message="Hello World!"  /&gt;
+                &lt;/declaration&gt;
+        &lt;/class&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>is equivalent to :</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>class Foo  {
+        myObject = { message : 'Hello World' };
+}</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>the script tag</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>In the context of a class defintion the script tag is considered like a part of the class body.
+
+        <tsml>
+                <class id="Greeter">
+                        <script>
+                                constructor(private message : string) { }
+                                greet() {
+                                        console.log(this.message);
+                                }
+                        </script>
+                </class>
+        </tsml>
+
+is equivalent to :
+
+        class Greeter  {
+                constructor(private message : string) { }
+                greet() {
+                        console.log(this.message);
+                }
+        }
+
+children</code></pre>
+</div></div>
+<div class="paragraph"><p>todo</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_module_declaration">10. Module Declaration</h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_function_declaration">11. Function Declaration</h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_directive">12. Directive</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Directive are just a way to call a function over a declared tag</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>&lt;tsml xmlns:event="import:../event/*"&gt;
+        &lt;Buton event:click="" /&gt;
+&lt;/tsml&gt;</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-06-16 02:43:45 CEST
+</div>
+</div>
+</body>
+</html>
